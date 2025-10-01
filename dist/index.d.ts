@@ -1,2 +1,1 @@
-export { createEventSchema } from "./schemas/eventSchema";
-export type { CreateEvent } from "./schemas/eventSchema";
+export { firstStepSchema, secondStepSchema, onboardSchema } from "./schemas/onboardSchemas.js";
