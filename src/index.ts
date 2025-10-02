@@ -1,5 +1,5 @@
 export {
   firstStepSchema,
   secondStepSchema,
-  onboardSchema
+  userSchema
 } from "./schemas/onboardSchemas.js";

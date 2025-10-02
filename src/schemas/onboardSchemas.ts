@@ -11,6 +11,6 @@ export const secondStepSchema = z.object({
   birthMonth: z.coerce.number().min(0).max(11),
 });
 
-export const onboardSchema = firstStepSchema
+export const userSchema = firstStepSchema
   .extend(secondStepSchema.shape)
   .omit(({ isTermsAgreed: true }));

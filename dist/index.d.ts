@@ -1,1 +1,1 @@
-export { firstStepSchema, secondStepSchema, onboardSchema } from "./schemas/onboardSchemas.js";
+export { firstStepSchema, secondStepSchema, userSchema } from "./schemas/onboardSchemas.js";
