@@ -13,6 +13,7 @@ export declare const meetingSchema: z.ZodObject<{
         crew: "crew";
         trustee: "trustee";
     }>;
-    materialUrls: z.ZodArray<z.ZodURL>;
+    materialUrls: z.ZodOptional<z.ZodArray<z.ZodURL>>;
     joinUrl: z.ZodOptional<z.ZodURL>;
 }, z.core.$strip>;
+export type Meeting = z.infer<typeof meetingSchema>;

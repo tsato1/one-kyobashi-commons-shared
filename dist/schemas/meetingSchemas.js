@@ -10,32 +10,8 @@ export const meetingSchema = z.object({
     description: z.string().optional(),
     location: z.string().optional(),
     allowedRoles: z.enum(["crew", "trustee"]),
-    materialUrls: z.array(z.url()),
-    joinUrl: z
-        .url("ビデオ会議URLを入力してください")
-        .refine((url) => {
-        try {
-            const parsedUrl = new URL(url);
-            const validHosts = [
-                /^zoom\.us$/,
-                /^[a-zA-Z0-9-]+\.zoom\.us$/, // stricter subdomain check
-                /^meet\.google\.com$/,
-            ];
-            return (parsedUrl.protocol === "https:" &&
-                validHosts.some((host) => host.test(parsedUrl.hostname)) &&
-                parsedUrl.pathname !== "/");
-        }
-        catch {
-            return false;
-        }
-    }, {
-        message: "URLはZoomまたはGoogle MeetのミーティングIDを含むリンクでなければなりません",
-    })
-        .refine((url) => {
-        const parsedUrl = new URL(url);
-        return parsedUrl.searchParams.size > 0; // ensure URL has query params for meeting details
-    }, {
-        message: "URLにミーティングに関するパラメタが含まれていません",
-    })
-        .optional()
+    materialUrls: z.array(z.url()) // todo: only allow canva or google docs urls
+        .optional(),
+    joinUrl: z.url("URLを入力してください") // todo: only allow zoom or google meet urls
+        .optional(),
 });
