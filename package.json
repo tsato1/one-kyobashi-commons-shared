@@ -6,7 +6,7 @@
     "tsato1 (https://github.com/tsato1)"
   ],
   "license": "MIT",
-  "version": "0.0.4-beta.4",
+  "version": "1.0.0",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
