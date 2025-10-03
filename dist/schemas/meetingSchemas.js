@@ -9,7 +9,7 @@ export const meetingSchema = z.object({
         .optional(),
     description: z.string().optional(),
     location: z.string().optional(),
-    allowedRoles: z.enum(["crew", "trustee"]),
+    allowedRoles: z.array(z.enum(["crew", "trustee"])),
     materialUrls: z.array(z.url()) // todo: only allow canva or google docs urls
         .optional(),
     joinUrl: z.url("URLを入力してください") // todo: only allow zoom or google meet urls

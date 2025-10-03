@@ -9,10 +9,10 @@ export declare const meetingSchema: z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;
     description: z.ZodOptional<z.ZodString>;
     location: z.ZodOptional<z.ZodString>;
-    allowedRoles: z.ZodEnum<{
+    allowedRoles: z.ZodArray<z.ZodEnum<{
         crew: "crew";
         trustee: "trustee";
-    }>;
+    }>>;
     materialUrls: z.ZodOptional<z.ZodArray<z.ZodURL>>;
     joinUrl: z.ZodOptional<z.ZodURL>;
 }, z.core.$strip>;
