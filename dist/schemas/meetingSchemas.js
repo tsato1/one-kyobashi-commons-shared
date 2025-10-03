@@ -1,5 +1,6 @@
 import { z } from "zod";
-export const meetingSchema = z.object({
+// Used to validate inputs for the create & update api endpoints
+export const mutateMeetingSchema = z.object({
     visibility: z.enum(["public", "private"]),
     startDate: z.date("start_date"),
     endDate: z.date("end_date").optional(),

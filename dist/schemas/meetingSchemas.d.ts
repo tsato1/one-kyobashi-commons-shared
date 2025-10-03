@@ -1,5 +1,5 @@
 import { z } from "zod";
-export declare const meetingSchema: z.ZodObject<{
+export declare const mutateMeetingSchema: z.ZodObject<{
     visibility: z.ZodEnum<{
         public: "public";
         private: "private";
@@ -16,4 +16,13 @@ export declare const meetingSchema: z.ZodObject<{
     materialUrls: z.ZodOptional<z.ZodArray<z.ZodURL>>;
     joinUrl: z.ZodOptional<z.ZodURL>;
 }, z.core.$strip>;
-export type Meeting = z.infer<typeof meetingSchema>;
+export type MeetingResponseDto = z.infer<typeof mutateMeetingSchema.shape & {
+    id: string;
+    createdBy: {
+        nickname: string;
+        image?: string;
+        role: string;
+    };
+    createdAt: Date;
+    updatedAt: Date;
+}>;

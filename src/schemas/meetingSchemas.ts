@@ -1,6 +1,7 @@
 import { z } from "zod";
 
-export const meetingSchema = z.object({
+// Used to validate inputs for the create & update api endpoints
+export const mutateMeetingSchema = z.object({
   visibility: z.enum(["public", "private"]),
   startDate: z.date("start_date"),
   endDate: z.date("end_date").optional(),
@@ -17,4 +18,15 @@ export const meetingSchema = z.object({
     .optional(),
 });
 
-export type Meeting = z.infer<typeof meetingSchema>;
+// Used as response DTO
+export type MeetingResponseDto = z.infer<typeof mutateMeetingSchema.shape & {
+  id: string,
+  createdBy: {
+    nickname: string,
+    image?: string,
+    role: string
+  },
+  createdAt: Date,
+  updatedAt: Date,
+}>;
+

@@ -3,4 +3,7 @@ export {
   secondStepSchema,
   userSchema
 } from "./schemas/onboardSchemas.js";
-export { meetingSchema } from "./schemas/meetingSchemas.js";
+export {
+  mutateMeetingSchema,
+  MeetingResponseDto
+} from "./schemas/meetingSchemas.js";
