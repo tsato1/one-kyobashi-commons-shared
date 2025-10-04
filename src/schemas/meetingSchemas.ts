@@ -18,15 +18,15 @@ export const mutateMeetingSchema = z.object({
     .optional(),
 });
 
-// Used as response DTO
-export type MeetingResponseDto = z.infer<typeof mutateMeetingSchema.shape & {
-  id: string,
-  createdBy: {
-    nickname: string,
-    image?: string,
-    role: string
-  },
-  createdAt: Date,
-  updatedAt: Date,
-}>;
+// Used to parse fetched data from DB
+export const meetingResponseSchema = mutateMeetingSchema.extend({
+  id: z.uuid(),
+  createdBy: z.object({
+    nickname: z.string(),
+    image: z.string().optional(),
+    role: z.enum(["crew", "trustee", "admin"])
+  }),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
 

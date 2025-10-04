@@ -16,3 +16,14 @@ export const mutateMeetingSchema = z.object({
     joinUrl: z.url("URLを入力してください") // todo: only allow zoom or google meet urls
         .optional(),
 });
+// Used to parse fetched data from DB
+export const meetingResponseSchema = mutateMeetingSchema.extend({
+    id: z.uuid(),
+    createdBy: z.object({
+        nickname: z.string(),
+        image: z.string().optional(),
+        role: z.enum(["crew", "trustee", "admin"])
+    }),
+    createdAt: z.date(),
+    updatedAt: z.date(),
+});

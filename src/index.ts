@@ -5,5 +5,5 @@ export {
 } from "./schemas/onboardSchemas.js";
 export {
   mutateMeetingSchema,
-  MeetingResponseDto
+  meetingResponseSchema
 } from "./schemas/meetingSchemas.js";
