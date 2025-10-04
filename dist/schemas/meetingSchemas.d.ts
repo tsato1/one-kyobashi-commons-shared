@@ -4,11 +4,11 @@ export declare const mutateMeetingSchema: z.ZodObject<{
         public: "public";
         private: "private";
     }>;
-    startDate: z.ZodDate;
-    endDate: z.ZodOptional<z.ZodDate>;
+    startDate: z.ZodOptional<z.ZodDate>;
+    endDate: z.ZodNullable<z.ZodOptional<z.ZodDate>>;
     name: z.ZodOptional<z.ZodString>;
-    description: z.ZodOptional<z.ZodString>;
-    location: z.ZodOptional<z.ZodString>;
+    description: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    location: z.ZodNullable<z.ZodOptional<z.ZodString>>;
     allowedRoles: z.ZodArray<z.ZodEnum<{
         crew: "crew";
         trustee: "trustee";
@@ -21,11 +21,11 @@ export declare const meetingResponseSchema: z.ZodObject<{
         public: "public";
         private: "private";
     }>;
-    startDate: z.ZodDate;
-    endDate: z.ZodOptional<z.ZodDate>;
+    startDate: z.ZodOptional<z.ZodDate>;
+    endDate: z.ZodNullable<z.ZodOptional<z.ZodDate>>;
     name: z.ZodOptional<z.ZodString>;
-    description: z.ZodOptional<z.ZodString>;
-    location: z.ZodOptional<z.ZodString>;
+    description: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    location: z.ZodNullable<z.ZodOptional<z.ZodString>>;
     allowedRoles: z.ZodArray<z.ZodEnum<{
         crew: "crew";
         trustee: "trustee";

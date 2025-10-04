@@ -3,15 +3,15 @@ import { z } from "zod";
 // Used to validate inputs for the create & update api endpoints
 export const mutateMeetingSchema = z.object({
   visibility: z.enum(["public", "private"]),
-  startDate: z.date("start_date"),
-  endDate: z.date("end_date").optional(),
+  startDate: z.date("start_date").optional(),
+  endDate: z.date("end_date").optional().nullable(),
   name: z.string()
     .min(1, { error: "会合名は必須です" })
     .max(255, { error: "会合名は255文字までです。" })
     .optional(),
-  description: z.string().optional(),
-  location: z.string().optional(),
-  allowedRoles: z.array(z.enum(["crew", "trustee"])),
+  description: z.string().optional().nullable(),
+  location: z.string().optional().nullable(),
+  allowedRoles: z.array(z.enum(["crew", "trustee"])), // Empty -> admins only: admins are allowed by default
   materialUrls: z.array(z.url()) // todo: only allow canva or google docs urls
     .optional(),
   joinUrl: z.url("URLを入力してください") // todo: only allow zoom or google meet urls
