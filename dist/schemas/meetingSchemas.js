@@ -2,8 +2,8 @@ import { z } from "zod";
 // Used to validate inputs for create & update forms
 export const mutateMeetingSchema = z.object({
     visibility: z.enum(["public", "private"]),
-    startDate: z.coerce.date("start_date"),
-    endDate: z.coerce.date("end_date").optional(),
+    startDate: z.date("start_date"),
+    endDate: z.date("end_date").optional(),
     name: z.string()
         .min(1, { error: "会合名は必須です" })
         .max(255, { error: "会合名は255文字までです。" }),
@@ -24,7 +24,12 @@ export const mutateMeetingSchema = z.object({
         .optional(),
 });
 // Used to validate inputs for create & update api endpoints
-export const mutateMeetingPartialSchema = mutateMeetingSchema.partial();
+export const mutateMeetingPartialSchema = mutateMeetingSchema
+    .extend({
+    startDate: z.coerce.date("start_date"),
+    endDate: z.coerce.date("end_date").optional()
+})
+    .partial();
 // Used to parse fetched data from DB
 export const meetingResponseSchema = mutateMeetingSchema.extend({
     id: z.uuid(),

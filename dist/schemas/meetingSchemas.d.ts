@@ -4,8 +4,8 @@ export declare const mutateMeetingSchema: z.ZodObject<{
         public: "public";
         private: "private";
     }>;
-    startDate: z.ZodCoercedDate<unknown>;
-    endDate: z.ZodOptional<z.ZodCoercedDate<unknown>>;
+    startDate: z.ZodDate;
+    endDate: z.ZodOptional<z.ZodDate>;
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
     location: z.ZodOptional<z.ZodString>;
@@ -21,8 +21,6 @@ export declare const mutateMeetingPartialSchema: z.ZodObject<{
         public: "public";
         private: "private";
     }>>;
-    startDate: z.ZodOptional<z.ZodCoercedDate<unknown>>;
-    endDate: z.ZodOptional<z.ZodOptional<z.ZodCoercedDate<unknown>>>;
     name: z.ZodOptional<z.ZodString>;
     description: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     location: z.ZodOptional<z.ZodOptional<z.ZodString>>;
@@ -32,14 +30,16 @@ export declare const mutateMeetingPartialSchema: z.ZodObject<{
     }>>>;
     materialUrls: z.ZodOptional<z.ZodOptional<z.ZodArray<z.ZodURL>>>;
     joinUrl: z.ZodOptional<z.ZodOptional<z.ZodURL>>;
+    startDate: z.ZodOptional<z.ZodCoercedDate<unknown>>;
+    endDate: z.ZodOptional<z.ZodOptional<z.ZodCoercedDate<unknown>>>;
 }, z.core.$strip>;
 export declare const meetingResponseSchema: z.ZodObject<{
     visibility: z.ZodEnum<{
         public: "public";
         private: "private";
     }>;
-    startDate: z.ZodCoercedDate<unknown>;
-    endDate: z.ZodOptional<z.ZodCoercedDate<unknown>>;
+    startDate: z.ZodDate;
+    endDate: z.ZodOptional<z.ZodDate>;
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
     location: z.ZodOptional<z.ZodString>;
