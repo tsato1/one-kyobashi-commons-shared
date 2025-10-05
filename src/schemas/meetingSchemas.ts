@@ -1,22 +1,32 @@
 import { z } from "zod";
 
-// Used to validate inputs for the create & update api endpoints
+// Used to validate inputs for create & update forms
 export const mutateMeetingSchema = z.object({
   visibility: z.enum(["public", "private"]),
-  startDate: z.date("start_date").optional(),
-  endDate: z.date("end_date").optional().nullable(),
+  startDate: z.date("start_date"),
+  endDate: z.date("end_date").optional(),
   name: z.string()
     .min(1, { error: "会合名は必須です" })
-    .max(255, { error: "会合名は255文字までです。" })
+    .max(255, { error: "会合名は255文字までです。" }),
+  description: z.string().optional(),
+  location: z.string().optional(),
+  allowedRoles: z.array(z.enum(["crew", "trustee"])),
+  materialUrls: z
+    .array(z.url({
+      protocol: /^https?$/,
+      hostname: z.regexes.domain,
+    }))
     .optional(),
-  description: z.string().optional().nullable(),
-  location: z.string().optional().nullable(),
-  allowedRoles: z.array(z.enum(["crew", "trustee"])), // Empty -> admins only: admins are allowed by default
-  materialUrls: z.array(z.url()) // todo: only allow canva or google docs urls
-    .optional(),
-  joinUrl: z.url("URLを入力してください") // todo: only allow zoom or google meet urls
+  joinUrl: z
+    .url({
+      protocol: /^https?$/,
+      hostname: /^(meet\.google\.com|zoom\.us|www\.zoom\.us)$/
+    })
     .optional(),
 });
+
+// Used to validate inputs for create & update api endpoints
+export const mutateMeetingPartialSchema = mutateMeetingSchema.partial()
 
 // Used to parse fetched data from DB
 export const meetingResponseSchema = mutateMeetingSchema.extend({
