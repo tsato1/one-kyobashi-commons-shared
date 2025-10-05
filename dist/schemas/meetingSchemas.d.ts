@@ -4,8 +4,8 @@ export declare const mutateMeetingSchema: z.ZodObject<{
         public: "public";
         private: "private";
     }>;
-    startDate: z.ZodDate;
-    endDate: z.ZodOptional<z.ZodDate>;
+    startDate: z.ZodCoercedDate<unknown>;
+    endDate: z.ZodOptional<z.ZodCoercedDate<unknown>>;
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
     location: z.ZodOptional<z.ZodString>;
@@ -21,8 +21,8 @@ export declare const mutateMeetingPartialSchema: z.ZodObject<{
         public: "public";
         private: "private";
     }>>;
-    startDate: z.ZodOptional<z.ZodDate>;
-    endDate: z.ZodOptional<z.ZodOptional<z.ZodDate>>;
+    startDate: z.ZodOptional<z.ZodCoercedDate<unknown>>;
+    endDate: z.ZodOptional<z.ZodOptional<z.ZodCoercedDate<unknown>>>;
     name: z.ZodOptional<z.ZodString>;
     description: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     location: z.ZodOptional<z.ZodOptional<z.ZodString>>;
@@ -38,8 +38,8 @@ export declare const meetingResponseSchema: z.ZodObject<{
         public: "public";
         private: "private";
     }>;
-    startDate: z.ZodDate;
-    endDate: z.ZodOptional<z.ZodDate>;
+    startDate: z.ZodCoercedDate<unknown>;
+    endDate: z.ZodOptional<z.ZodCoercedDate<unknown>>;
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
     location: z.ZodOptional<z.ZodString>;
