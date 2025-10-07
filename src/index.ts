@@ -4,6 +4,7 @@ export {
   userSchema
 } from "./schemas/onboardSchemas.js";
 export {
+  queryMeetingSchema,
   mutateMeetingSchema,
   mutateMeetingPartialSchema,
   meetingResponseSchema
