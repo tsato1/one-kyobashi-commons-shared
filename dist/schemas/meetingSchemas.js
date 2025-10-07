@@ -20,11 +20,11 @@ export const queryMeetingSchema = z.object({
 // Used to validate inputs for create & update forms
 export const mutateMeetingSchema = z.object({
     visibility: z.enum(["public", "private"]),
-    startDate: z.date("start_date"),
-    endDate: z.date("end_date").optional(),
+    startDate: z.date("開始日時は必須です"),
+    endDate: z.date().optional(),
     name: z.string()
-        .min(1, { error: "会合名は必須です" })
-        .max(255, { error: "会合名は255文字までです。" }),
+        .min(1, { error: "名前は必須です" })
+        .max(255, { error: "名前は255文字までです" }),
     description: z.string().optional(),
     location: z.string().optional(),
     allowedRoles: z.array(z.enum(["crew", "trustee"])),
@@ -32,12 +32,14 @@ export const mutateMeetingSchema = z.object({
         .array(z.url({
         protocol: /^https?$/,
         hostname: z.regexes.domain,
+        error: "正しいフォーマットでURLを入力してください",
     }))
         .optional(),
     joinUrl: z
         .url({
         protocol: /^https?$/,
-        hostname: /^(meet\.google\.com|zoom\.us|www\.zoom\.us)$/
+        hostname: /^(meet\.google\.com|zoom\.us|www\.zoom\.us)$/,
+        error: "正しいフォーマットでURLを入力してください",
     })
         .optional(),
 });
