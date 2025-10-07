@@ -18,6 +18,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "date-fns": "^4.1.0",
     "zod": "^4.1.11"
   },
   "peerDependencies": {

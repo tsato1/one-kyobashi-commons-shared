@@ -1,8 +1,14 @@
 import { z } from "zod";
-export declare const queryMeetingSchema: z.ZodObject<{
+export declare const queryMeetingSchema: z.ZodPipe<z.ZodObject<{
     dateMin: z.ZodOptional<z.ZodISODateTime>;
     dateMax: z.ZodOptional<z.ZodISODateTime>;
-}, z.core.$strip>;
+}, z.core.$strip>, z.ZodTransform<{
+    startDate: Date;
+    endDate: Date;
+}, {
+    dateMin?: string | undefined;
+    dateMax?: string | undefined;
+}>>;
 export declare const mutateMeetingSchema: z.ZodObject<{
     visibility: z.ZodEnum<{
         public: "public";

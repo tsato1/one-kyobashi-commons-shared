@@ -1,10 +1,49 @@
 import { z } from "zod";
+import { endOfMonth, startOfMonth } from "date-fns";
 
 // Used to validate query params
 export const queryMeetingSchema = z.object({
   dateMin: z.iso.datetime().optional(),
   dateMax: z.iso.datetime().optional(),
-});
+})
+  .superRefine(
+    (val, ctx) => {
+      if (val.dateMin && val.dateMax) {
+        if (val.dateMin > val.dateMax) {
+          ctx.addIssue({
+            code: "custom",
+            message: "dateMax must be greater than dateMin",
+            path: ["dateMax"]
+          });
+        };
+
+        // todo: error out if the two dates are too far apart like 10 months
+      }
+    },
+  )
+  .transform(({ dateMin, dateMax }) => {
+    const now = new Date();
+    let startDate: Date;
+    let endDate: Date;
+
+    if (dateMin) {
+      startDate = new Date(dateMin);
+    } else {
+      startDate = startOfMonth(now);
+    }
+
+    if (dateMax) {
+      endDate = new Date(dateMax);
+    } else {
+      if (dateMin) {
+        endDate = endOfMonth(new Date(dateMin));
+      } else {
+        endDate = endOfMonth(now);
+      }
+    }
+
+    return { startDate, endDate };
+  });
 
 // Used to validate inputs for create & update forms
 export const mutateMeetingSchema = z.object({
