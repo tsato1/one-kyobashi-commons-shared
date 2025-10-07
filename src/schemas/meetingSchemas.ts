@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+// Used to validate query params
+export const queryMeetingSchema = z.object({
+  dateMin: z.iso.datetime().optional(),
+  dateMax: z.iso.datetime().optional(),
+});
+
 // Used to validate inputs for create & update forms
 export const mutateMeetingSchema = z.object({
   visibility: z.enum(["public", "private"]),
