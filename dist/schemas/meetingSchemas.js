@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { endOfMonth, startOfMonth } from "date-fns";
 // Used to validate query params
 export const queryMeetingSchema = z.object({
     dateMin: z.iso.datetime().optional(),
@@ -17,29 +16,6 @@ export const queryMeetingSchema = z.object({
         ;
         // todo: error out if the two dates are too far apart like 10 months
     }
-})
-    .transform(({ dateMin, dateMax }) => {
-    const now = new Date();
-    let startDate;
-    let endDate;
-    if (dateMin) {
-        startDate = new Date(dateMin);
-    }
-    else {
-        startDate = startOfMonth(now);
-    }
-    if (dateMax) {
-        endDate = new Date(dateMax);
-    }
-    else {
-        if (dateMin) {
-            endDate = endOfMonth(new Date(dateMin));
-        }
-        else {
-            endDate = endOfMonth(now);
-        }
-    }
-    return { startDate, endDate };
 });
 // Used to validate inputs for create & update forms
 export const mutateMeetingSchema = z.object({
@@ -65,13 +41,6 @@ export const mutateMeetingSchema = z.object({
     })
         .optional(),
 });
-// Used to validate inputs for create & update api endpoints
-export const mutateMeetingPartialSchema = mutateMeetingSchema
-    .extend({
-    startDate: z.coerce.date("start_date"),
-    endDate: z.coerce.date("end_date").optional()
-})
-    .partial();
 // Used to parse fetched data from DB
 export const meetingResponseSchema = mutateMeetingSchema.extend({
     id: z.uuid(),

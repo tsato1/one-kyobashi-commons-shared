@@ -6,6 +6,5 @@ export {
 export {
   queryMeetingSchema,
   mutateMeetingSchema,
-  mutateMeetingPartialSchema,
   meetingResponseSchema
 } from "./schemas/meetingSchemas.js";

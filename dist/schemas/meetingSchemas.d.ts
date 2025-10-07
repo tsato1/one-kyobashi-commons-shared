@@ -1,14 +1,8 @@
 import { z } from "zod";
-export declare const queryMeetingSchema: z.ZodPipe<z.ZodObject<{
+export declare const queryMeetingSchema: z.ZodObject<{
     dateMin: z.ZodOptional<z.ZodISODateTime>;
     dateMax: z.ZodOptional<z.ZodISODateTime>;
-}, z.core.$strip>, z.ZodTransform<{
-    startDate: Date;
-    endDate: Date;
-}, {
-    dateMin?: string | undefined;
-    dateMax?: string | undefined;
-}>>;
+}, z.core.$strip>;
 export declare const mutateMeetingSchema: z.ZodObject<{
     visibility: z.ZodEnum<{
         public: "public";
@@ -25,23 +19,6 @@ export declare const mutateMeetingSchema: z.ZodObject<{
     }>>;
     materialUrls: z.ZodOptional<z.ZodArray<z.ZodURL>>;
     joinUrl: z.ZodOptional<z.ZodURL>;
-}, z.core.$strip>;
-export declare const mutateMeetingPartialSchema: z.ZodObject<{
-    visibility: z.ZodOptional<z.ZodEnum<{
-        public: "public";
-        private: "private";
-    }>>;
-    name: z.ZodOptional<z.ZodString>;
-    description: z.ZodOptional<z.ZodOptional<z.ZodString>>;
-    location: z.ZodOptional<z.ZodOptional<z.ZodString>>;
-    allowedRoles: z.ZodOptional<z.ZodArray<z.ZodEnum<{
-        crew: "crew";
-        trustee: "trustee";
-    }>>>;
-    materialUrls: z.ZodOptional<z.ZodOptional<z.ZodArray<z.ZodURL>>>;
-    joinUrl: z.ZodOptional<z.ZodOptional<z.ZodURL>>;
-    startDate: z.ZodOptional<z.ZodCoercedDate<unknown>>;
-    endDate: z.ZodOptional<z.ZodOptional<z.ZodCoercedDate<unknown>>>;
 }, z.core.$strip>;
 export declare const meetingResponseSchema: z.ZodObject<{
     visibility: z.ZodEnum<{
