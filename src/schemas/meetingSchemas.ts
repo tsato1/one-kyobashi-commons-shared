@@ -40,12 +40,17 @@ export const mutateMeetingSchema = z.object({
     }))
     .optional(),
   joinUrl: z
-    .url({
-      protocol: /^https?$/,
-      hostname: /^(meet\.google\.com|zoom\.us|www\.zoom\.us)$/,
-      error: "正しいフォーマットでURLを入力してください",
-    })
-    .optional(),
+    .string()
+    .optional()
+    .transform((val) => (val === "" ? undefined : val))
+    .pipe(z
+      .url({
+        protocol: /^https?$/,
+        hostname: /^(meet\.google\.com|zoom\.us|www\.zoom\.us)$/,
+        error: "正しいフォーマットでURLを入力してください",
+      })
+      .optional(),
+    )
 });
 
 // Used to parse fetched data from DB

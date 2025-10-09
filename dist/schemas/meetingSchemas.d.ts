@@ -18,7 +18,7 @@ export declare const mutateMeetingSchema: z.ZodObject<{
         trustee: "trustee";
     }>>;
     materialUrls: z.ZodOptional<z.ZodArray<z.ZodURL>>;
-    joinUrl: z.ZodOptional<z.ZodURL>;
+    joinUrl: z.ZodPipe<z.ZodPipe<z.ZodOptional<z.ZodString>, z.ZodTransform<string | undefined, string | undefined>>, z.ZodOptional<z.ZodURL>>;
 }, z.core.$strip>;
 export declare const meetingResponseSchema: z.ZodObject<{
     visibility: z.ZodEnum<{
@@ -35,7 +35,7 @@ export declare const meetingResponseSchema: z.ZodObject<{
         trustee: "trustee";
     }>>;
     materialUrls: z.ZodOptional<z.ZodArray<z.ZodURL>>;
-    joinUrl: z.ZodOptional<z.ZodURL>;
+    joinUrl: z.ZodPipe<z.ZodPipe<z.ZodOptional<z.ZodString>, z.ZodTransform<string | undefined, string | undefined>>, z.ZodOptional<z.ZodURL>>;
     id: z.ZodUUID;
     createdBy: z.ZodObject<{
         nickname: z.ZodString;
